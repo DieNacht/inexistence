@@ -269,7 +269,7 @@ function preparation() {
 
     # Get repository
     [[ -d /etc/inexistence ]] && mv /etc/inexistence /etc/inexistence_old_$(date "+%Y%m%d_%H%M") >> "$OutputLOG" 2>&1
-    git clone --depth=1 -b $iBranch https://github.com/Aniverse/inexistence /etc/inexistence >> "$OutputLOG" 2>&1
+    git clone --depth=1 -b $iBranch https://github.com/DieNacht/inexistence /etc/inexistence >> "$OutputLOG" 2>&1
     chmod -R 755 /etc/inexistence >> "$OutputLOG" 2>&1
     chmod -R 644 /etc/inexistence/00.Installation/template/systemd/* >> "$OutputLOG" 2>&1
 
