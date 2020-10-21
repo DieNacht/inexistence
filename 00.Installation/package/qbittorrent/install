@@ -283,7 +283,7 @@ function compile_qbittorrent() {
         git config --global user.name "Your Name"                    >> $OutputLOG 2>&1
         git revert eea38e7c9ecb1e1df5e889cb42fc93d3f79d429f -n       >> $OutputLOG 2>&1
         grep PACKAGE_STRING configure | head -1 | grep -oE "[0-9.]+" >> $OutputLOG 2>&1
-    elif [[ $version == 4.3.0 ]]; then
+    elif [[ $version == 4.4.0 ]]; then
         git clone --depth=1 -b master https://github.com/qbittorrent/qBittorrent qBittorrent-master >> $OutputLOG 2>&1
         cd qBittorrent-master
     elif [[ $version == 3.3.11.1 ]]; then
