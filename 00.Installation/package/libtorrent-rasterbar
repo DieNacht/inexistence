@@ -274,7 +274,27 @@ function install_lt9_deb2() {
     echo >> $OutputLOG
 }
 
+function install_lt10_deb() {
+    lines2 >> $OutputLOG
+    status_lock=$AppNameLower
+    echo "status_lock=$status_lock" > /tmp/Variables
+    rm -f /tmp/$status_lock.1.lock /tmp/$status_lock.2.lock
 
+    [[ $CODENAME == buster ]] && apt-get install -y --allow-downgrades libgeoip-dev=1.6.12-1 libgeoip1=1.6.12-1 >> $OutputLOG 2>&1
+    list="libtorrent-rasterbar10_1.2.10-1build1_amd64.deb
+          libtorrent-rasterbar-dev_1.2.10-1build1_amd64.deb
+          python-libtorrent_1.2.10-1build1_amd64.deb
+          python3-libtorrent_1.2.10-1build1_amd64.deb"
+    mkdir -p /tmp/lt_deb
+    cd /tmp/lt_deb
+    for deb in $list ; do
+        deb-get libtorrent-rasterbar $deb install
+    done
+    cd ; rm -rf /tmp/lt_deb
+    touch /tmp/$status_lock.1.lock
+
+    echo >> $OutputLOG
+}
 
 
 
@@ -328,6 +348,11 @@ case $mode in
     deb3    ) version=1.1.14
               echo_task "Installing libtorrent-rasterbar ${bold}${cyan}$version${normal} from pre-compiled deb package ..."
               install_lt9_deb2 & spinner $!
+              ;;
+
+    deb4    ) version=1.2.10
+              echo_task "Installing libtorrent-rasterbar ${bold}${cyan}$version${normal} from pre-compiled deb package ..."
+              install_lt10_deb & spinner $!
               ;;
 
     source  ) install_base fpm
