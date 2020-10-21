@@ -310,7 +310,11 @@ function compile_qbittorrent() {
     qt_set_env
     pkg-config --exists --print-errors "Qt5Core >= 10086" 2>&1 | awk '{print $NF}' | grep -oE [0-9.]+ >> $OutputLOG 2>&1 # For debug
 
-    ./configure $compile_flag --prefix=/usr >> $OutputLOG 2>&1
+    if version_ge $version_s 4.3.0 ; then
+        ./configure $compile_flag --prefix=/usr CXXFLAGS=-std=c++14 >> $OutputLOG 2>&1
+    else
+        ./configure $compile_flag --prefix=/usr >> $OutputLOG 2>&1
+    fi
     make $compile_flag_threads >> $OutputLOG 2>&1
     rm -rf $SCLocation/tmp-$AppNameLower
     make install INSTALL_ROOT=$SCLocation/tmp-$AppNameLower >> $OutputLOG 2>&1
