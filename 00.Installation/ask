@@ -864,7 +864,7 @@ function do_installation() {
         elif [[ $lt_version == RC_1_1 ]]; then
             bash $local_packages/package/libtorrent-rasterbar --logbase $LogTimes -m deb3
         elif [[ $lt_version == RC_1_2 ]]; then
-            bash $local_packages/package/libtorrent-rasterbar --logbase $LogTimes -b RC_1_2
+            bash $local_packages/package/libtorrent-rasterbar --logbase $LogTimes -m deb4
         else
             bash $local_packages/package/libtorrent-rasterbar --logbase $LogTimes -v $lt_version
         fi
